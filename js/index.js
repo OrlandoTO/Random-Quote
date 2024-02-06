@@ -2,26 +2,25 @@
 
 const quoteContent = document.getElementById('quote-content')
 const quoteAuthor = document.getElementById('quote-author')
-const root = document.getElementById('root')
-const quoteCategory = document.getElementById('quote-category')
+const quoteTags = document.getElementById('quote-tags')
 let quotes = []
 let randomIndex = 0
 let currentQuote = {}
 const init = () => {
-    fetch('./js/data.json')
+    fetch('https://api.quotable.io/random')
         .then(response => response.json())
         .then(data => {
-            quotes = data
-            generateNewQuote()
+            currentQuote = data
+            updateQuote()
         })
 
 }
-const generateNewQuote = () => {
-    randomIndex = Math.floor((Math.random() * quotes.length))
-    currentQuote = quotes[randomIndex]
-    quoteContent.innerHTML = currentQuote.quote
+const updateQuote = () => {
+
     quoteAuthor.innerHTML = currentQuote.author
-    quoteCategory.innerHTML = currentQuote.category
+    quoteContent.innerHTML = currentQuote.content
+    const tags = currentQuote.tags.reduce((prev,current)=> prev +`<span>${current}</span>`,'')
+    quoteTags.innerHTML = tags
 }
 
 const clipboard = ()=>{
@@ -37,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 });
 
-document.getElementById('btn-generate-newQuote').addEventListener('click', generateNewQuote)
+document.getElementById('btn-generate-newQuote').addEventListener('click', init)
 document.getElementById('btn-copy-quote').addEventListener('click', clipboard)
 
 
