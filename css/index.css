@@ -22,14 +22,14 @@ main {
 }
 
 .quote {
-    
-    height: 209px;
+    height: auto;
     width: 550px;
     padding: 30px;
     border-radius: 10px;
     background-color: #20293A;
     position: relative;
-
+    background-image: url('../img/bg-image-random-quote.svg');
+    background-size: cover;
 
 }
 
@@ -67,12 +67,7 @@ main {
 
 }
 
-.quote>img {
-    position: absolute;
-    top: 0;
-    right: 0;
 
-}
 
 .controls__quote {
     margin: 20px 0;
